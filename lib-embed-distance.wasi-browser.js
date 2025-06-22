@@ -5,7 +5,7 @@ import {
   createOnMessage as __wasmCreateOnMessageForFsProxy,
 } from '@napi-rs/wasm-runtime'
 
-import __wasmUrl from './lib-napi-add-v2.wasm32-wasi.wasm?url'
+import __wasmUrl from './lib-embed-distance.wasm32-wasi.wasm?url'
 
 const __wasi = new __WASI({
   version: 'preview1',

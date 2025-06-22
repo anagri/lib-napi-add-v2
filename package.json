@@ -1,12 +1,12 @@
 {
-  "name": "lib-napi-add-v2",
+  "name": "lib-embed-distance",
   "version": "0.1.0",
   "description": "A library for adding two numbers",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "browser.js",
   "repository": {
-    "url":  "https://github.com/anagri/lib-napi-add-v2/",
+    "url":  "https://github.com/anagri/lib-embed-distance/",
     "type": "git"
   },
   "license": "MIT",
@@ -24,7 +24,7 @@
     "browser.js"
   ],
   "napi": {
-    "binaryName": "lib-napi-add-v2",
+    "binaryName": "lib-embed-distance",
     "targets": [
       "x86_64-apple-darwin",
       "aarch64-apple-darwin",

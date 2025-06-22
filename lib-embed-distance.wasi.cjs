@@ -32,16 +32,16 @@ const __sharedMemory = new WebAssembly.Memory({
   shared: true,
 })
 
-let __wasmFilePath = __nodePath.join(__dirname, 'lib-napi-add-v2.wasm32-wasi.wasm')
-const __wasmDebugFilePath = __nodePath.join(__dirname, 'lib-napi-add-v2.wasm32-wasi.debug.wasm')
+let __wasmFilePath = __nodePath.join(__dirname, 'lib-embed-distance.wasm32-wasi.wasm')
+const __wasmDebugFilePath = __nodePath.join(__dirname, 'lib-embed-distance.wasm32-wasi.debug.wasm')
 
 if (__nodeFs.existsSync(__wasmDebugFilePath)) {
   __wasmFilePath = __wasmDebugFilePath
 } else if (!__nodeFs.existsSync(__wasmFilePath)) {
   try {
-    __wasmFilePath = __nodePath.resolve('lib-napi-add-v2-wasm32-wasi')
+    __wasmFilePath = __nodePath.resolve('lib-embed-distance-wasm32-wasi')
   } catch {
-    throw new Error('Cannot find lib-napi-add-v2.wasm32-wasi.wasm file, and lib-napi-add-v2-wasm32-wasi package is not installed.')
+    throw new Error('Cannot find lib-embed-distance.wasm32-wasi.wasm file, and lib-embed-distance-wasm32-wasi package is not installed.')
   }
 }
 
