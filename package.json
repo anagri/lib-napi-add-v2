@@ -1,12 +1,12 @@
 {
-  "name": "lib-napi-add-v2",
-  "version": "0.1.0",
-  "description": "A simple library for adding two numbers",
+  "name": "@napi-rs/package-template-pnpm",
+  "version": "1.1.1",
+  "description": "Template project for writing node package with napi-rs",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "browser.js",
   "repository": {
-    "url": "https://github.com/anagri/lib-napi-add-v2",
+    "url": "git+ssh://git@github.com/napi-rs/package-template-pnpm.git",
     "type": "git"
   },
   "license": "MIT",
@@ -24,7 +24,7 @@
     "browser.js"
   ],
   "napi": {
-    "binaryName": "lib-napi-add-v2",
+    "binaryName": "package-template",
     "targets": [
       "x86_64-apple-darwin",
       "aarch64-apple-darwin",
