@@ -1,1 +1,1 @@
-export * from '@napi-rs/package-template-pnpm-wasm32-wasi'
+export * from 'lib-napi-add-v2-wasm32-wasi'

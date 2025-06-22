@@ -21,7 +21,7 @@ const __wasi = new __nodeWASI({
   env: process.env,
   preopens: {
     [__rootDir]: __rootDir,
-  },
+  }
 })
 
 const __emnapiContext = __emnapiGetDefaultContext()
@@ -32,28 +32,22 @@ const __sharedMemory = new WebAssembly.Memory({
   shared: true,
 })
 
-let __wasmFilePath = __nodePath.join(__dirname, 'package-template.wasm32-wasi.wasm')
-const __wasmDebugFilePath = __nodePath.join(__dirname, 'package-template.wasm32-wasi.debug.wasm')
+let __wasmFilePath = __nodePath.join(__dirname, 'lib-napi-add-v2.wasm32-wasi.wasm')
+const __wasmDebugFilePath = __nodePath.join(__dirname, 'lib-napi-add-v2.wasm32-wasi.debug.wasm')
 
 if (__nodeFs.existsSync(__wasmDebugFilePath)) {
   __wasmFilePath = __wasmDebugFilePath
 } else if (!__nodeFs.existsSync(__wasmFilePath)) {
   try {
-    __wasmFilePath = __nodePath.resolve('@napi-rs/package-template-pnpm-wasm32-wasi')
+    __wasmFilePath = __nodePath.resolve('lib-napi-add-v2-wasm32-wasi')
   } catch {
-    throw new Error(
-      'Cannot find package-template.wasm32-wasi.wasm file, and @napi-rs/package-template-pnpm-wasm32-wasi package is not installed.',
-    )
+    throw new Error('Cannot find lib-napi-add-v2.wasm32-wasi.wasm file, and lib-napi-add-v2-wasm32-wasi package is not installed.')
   }
 }
 
-const {
-  instance: __napiInstance,
-  module: __wasiModule,
-  napiModule: __napiModule,
-} = __emnapiInstantiateNapiModuleSync(__nodeFs.readFileSync(__wasmFilePath), {
+const { instance: __napiInstance, module: __wasiModule, napiModule: __napiModule } = __emnapiInstantiateNapiModuleSync(__nodeFs.readFileSync(__wasmFilePath), {
   context: __emnapiContext,
-  asyncWorkPoolSize: (function () {
+  asyncWorkPoolSize: (function() {
     const threadsSizeFromEnv = Number(process.env.NAPI_RS_ASYNC_WORK_POOL_SIZE ?? process.env.UV_THREADPOOL_SIZE)
     // NaN > 0 is false
     if (threadsSizeFromEnv > 0) {
@@ -62,11 +56,11 @@ const {
       return 4
     }
   })(),
+  reuseWorker: true,
   wasi: __wasi,
   onCreateWorker() {
     const worker = new Worker(__nodePath.join(__dirname, 'wasi-worker.mjs'), {
       env: process.env,
-      execArgv: ['--experimental-wasi-unstable-preview1'],
     })
     worker.onmessage = ({ data }) => {
       __wasmCreateOnMessageForFsProxy(__nodeFs)(data)
@@ -84,7 +78,7 @@ const {
   },
   beforeInit({ instance }) {
     __napi_rs_initialize_modules(instance)
-  },
+  }
 })
 
 function __napi_rs_initialize_modules(__napiInstance) {
