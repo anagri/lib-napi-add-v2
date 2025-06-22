@@ -6,7 +6,7 @@
   "types": "index.d.ts",
   "browser": "browser.js",
   "repository": {
-    "url":  "https://github.com/anagri/lib-embed-distance/",
+    "url":  "https://github.com/anagri/lib-napi-add-v2/",
     "type": "git"
   },
   "license": "MIT",
